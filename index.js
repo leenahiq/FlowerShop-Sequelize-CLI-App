@@ -1,20 +1,21 @@
 require("dotenv").config();
-
+//import dependencies
 const yargs = require("yargs");
 const { hideBin } = require("yargs/helpers");
 const argv = yargs(hideBin(process.argv)).argv;
 const bcrypt = require("bcrypt");
 const saltRounds = parseInt(process.env.SALT_Round);
-// import files
+// import connection
 const connection = require("./connection");
+//import models
 const Flower = require("./models/flower");
 const Event = require("./models/event");
 const Price = require("./models/price");
 const User = require("./models/users");
 
+//imort utils
 const add = require("./utils/add");
 const list = require("./utils/list");
-// const listevent = require("./utils/list");
 const del = require("./utils/delete");
 const update = require("./utils/update");
 
@@ -26,6 +27,7 @@ const update = require("./utils/update");
 // main();
 
 const main = async (argv) => {
+  //--------------FLOWER------------------//
   //to alter flower table
   await Flower.sync({ alter: true });
   // npm start -- --add --name "rose" --colour "red" --indication "love"
@@ -48,6 +50,8 @@ const main = async (argv) => {
     await update(argv);
   }
 
+  //---------------EVENT-----------//
+
   //alter to event table
   await Event.sync({ alter: true });
   // add to  table
@@ -57,7 +61,7 @@ const main = async (argv) => {
     await add(argv);
   }
   //   //list all rows in table as object
-  else if (argv.listevent) {
+  else if (argv.list) {
     await listevent(argv);
   }
   //delete
@@ -69,6 +73,8 @@ const main = async (argv) => {
     await update(argv);
   }
 
+  //---------------------PRICE-------------
+
   // alter price table
   await Price.sync({ alter: true });
   //   // add to table
@@ -77,7 +83,7 @@ const main = async (argv) => {
     await add(argv);
   }
   //   //list all rows in table as object
-  else if (argv.listprice) {
+  else if (argv.list) {
     await list(argv);
   }
   //  /delete
@@ -88,6 +94,9 @@ const main = async (argv) => {
   else if (argv.update) {
     await update(argv);
   }
+
+  //---------------------USER--------------//
+
   //  alter User table
   await User.sync({ alter: true });
   //   add to table

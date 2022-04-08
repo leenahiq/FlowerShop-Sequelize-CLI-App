@@ -7,36 +7,52 @@ const User = require("../models/users.js");
 const del = async (argv) => {
   if (argv.name || argv.colour || argv.indication) {
     //creating instance
-    const del = await Flower.delete({
-      where: {
-        name: argv.name,
-        colour: argv.colour,
-        indication: argv.indication,
-      },
-    });
-    console.log(` ${del.name} is deleted `);
+    try {
+      const del = await Flower.delete({
+        where: {
+          name: argv.name,
+          colour: argv.colour,
+          indication: argv.indication,
+        },
+      });
+      console.log(` ${del.name} is deleted `);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (argv.eventname) {
-    const del = await Event.destroy({
-      where: {
-        eventname: argv.eventname,
-      },
-    });
-    console.log(` ${del.eventname} is deleted `);
+    try {
+      const del = await Event.destroy({
+        where: {
+          eventname: argv.eventname,
+        },
+      });
+      console.log(` ${del.eventname} is deleted `);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (argv.quantity || argv.price) {
-    const del = await Price.destroy({
-      where: {
-        price: argv.price,
-        quantity: argv.quantity,
-      },
-    });
-    console.log(` ${del.price} is deleted `);
+    try {
+      const del = await Price.destroy({
+        where: {
+          price: argv.price,
+          quantity: argv.quantity,
+        },
+      });
+      console.log(` ${del.price} is deleted `);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (argv.delete) {
-    const del = await User.destroy({
-      where: {
-        username: "argv.username",
-      },
-    });
-    console.log(` ${del.username} is deleted `);
+    try {
+      const del = await User.destroy({
+        where: {
+          username: "argv.username",
+        },
+      });
+      console.log(` ${del.username} is deleted `);
+    } catch (error) {
+      console.log(error);
+    }
   } else {
     console.log("please input all fields");
   }

@@ -7,25 +7,41 @@ const User = require("../models/users.js");
 const list = async (argv) => {
   if (argv) {
     //creating instance
-    const list = await Flower.findAll({
-      attributes1: [argv.attributes],
-    });
-    console.log(list);
+    try {
+      const list = await Flower.findAll({
+        attributes1: [argv.attributes],
+      });
+      console.log(list);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (argv) {
-    const list = await Event.list({
-      attributes: [argv.attribute],
-    });
-    console.log(list);
+    try {
+      const list = await Event.list({
+        attributes: [argv.attribute],
+      });
+      console.log(list);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (argv) {
-    const list = await Price.list({
-      attributes: [argv.attribute],
-    });
-    console.log(list);
+    try {
+      const list = await Price.list({
+        attributes: [argv.attribute],
+      });
+      console.log(list);
+    } catch (error) {
+      console.log(error);
+    }
   } else if (argv.list) {
-    const list = await User.findAll({
-      attributes: [argv.attribute],
-    });
-    console.log(list);
+    try {
+      const list = await User.findAll({
+        attributes: [argv.attribute],
+      });
+      console.log(list);
+    } catch (error) {
+      console.log(error);
+    }
   } else {
     console.log("error try again");
   }
