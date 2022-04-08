@@ -8,11 +8,6 @@ const Event = connection.define("Event", {
     allowNull: false,
     unique: true,
   },
-
-  //   flower_id: {
-  //     type: DataTypes.INTEGER,
-  //     allowNull: false,
-  //   },
 });
 Event.belongsTo(Flower);
 module.exports = Event;

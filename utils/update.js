@@ -2,17 +2,18 @@ const { Sequelize } = require("sequelize");
 
 const Flower = require("../models/flower.js");
 const Event = require("../models/event.js");
-const Price = require("../models/price.js");
+
 const User = require("../models/users.js");
 const update = async (argv) => {
-  if (argv.newname && argv.newcolour && argv.newindication) {
+  if (argv.flower) {
     //creating instance
 
     const update = await Flower.update(
       {
         name: argv.newname,
-        colour: argv.newcolour,
-        indication: argv.newindication,
+        colour: argv.colour,
+        indication: argv.indication,
+        price: argv.price,
       },
       {
         where: {
@@ -21,40 +22,22 @@ const update = async (argv) => {
       }
     );
     console.log(update);
-
-    // { name: argv.name } || { colour: argv.colour } || {
-    //     indication: argv.indication,
-    //   },
-    // {
-    //   where: {
-    //     name: argv.name,
-    //   },
-    // }
-    //);
-  } else if (argv.eventname) {
-    const update = await Event.findOne({
-      where: { eventname: argv.eventname },
-    });
-    if (update) {
-      update.eventname = argv.eventname;
-      await update.save();
-    } else {
-      console.log("user not found");
-    }
-  } else if (argv.newquantity && argv.newprice) {
-    const update = await Price.update(
-      { [argv.key]: [argv.newvalue], [argv.key]: [argv.newvalue] },
+  } else if (argv.event) {
+    const update = await Event.update(
+      {
+        eventname: argv.neweventname,
+      },
       {
         where: {
-          [argv.key]: [argv.value],
+          eventname: argv.eventname,
         },
       }
     );
     console.log(update);
-  } else if (argv.update) {
+  } else if (argv.user) {
     const update = await User.update(
       {
-        username: argv.username,
+        username: argv.newusername,
         fullname: argv.fullname,
 
         password: argv.password,

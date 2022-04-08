@@ -2,41 +2,33 @@ const { Sequelize } = require("sequelize");
 
 const Flower = require("../models/flower.js");
 const Event = require("../models/event.js");
-const Price = require("../models/price.js");
+
 const User = require("../models/users.js");
 const list = async (argv) => {
-  if (argv) {
+  if (argv.flower) {
     //creating instance
+    // console.log("flower"); for checking
     try {
-      const list = await Flower.findAll({
-        attributes1: [argv.attributes],
+      const list = await Flower.findAll({});
+      console.log(list);
+    } catch (error) {
+      console.log(error);
+    }
+  } else if (argv.event) {
+    // console.log("event");check
+    try {
+      const list = await Event.findAll({
+        // attributes: [argv.attribute],
       });
       console.log(list);
     } catch (error) {
       console.log(error);
     }
-  } else if (argv) {
-    try {
-      const list = await Event.list({
-        attributes: [argv.attribute],
-      });
-      console.log(list);
-    } catch (error) {
-      console.log(error);
-    }
-  } else if (argv) {
-    try {
-      const list = await Price.list({
-        attributes: [argv.attribute],
-      });
-      console.log(list);
-    } catch (error) {
-      console.log(error);
-    }
-  } else if (argv.list) {
+  } else if (argv.user) {
+    // console.log("user");
     try {
       const list = await User.findAll({
-        attributes: [argv.attribute],
+        // attributes: [argv.attribute],
       });
       console.log(list);
     } catch (error) {

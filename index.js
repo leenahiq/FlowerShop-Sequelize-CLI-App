@@ -10,7 +10,7 @@ const connection = require("./connection");
 //import models
 const Flower = require("./models/flower");
 const Event = require("./models/event");
-const Price = require("./models/price");
+
 const User = require("./models/users");
 
 //imort utils
@@ -27,9 +27,11 @@ const update = require("./utils/update");
 // main();
 
 const main = async (argv) => {
-  //--------------FLOWER------------------//
-  //to alter flower table
+  //to alter all table
   await Flower.sync({ alter: true });
+  await Event.sync({ alter: true });
+  await User.sync({ alter: true });
+
   // npm start -- --add --name "rose" --colour "red" --indication "love"
   // add to flower table
   if (argv.add) {
@@ -46,72 +48,6 @@ const main = async (argv) => {
     await del(argv);
   }
   // update
-  else if (argv.update) {
-    await update(argv);
-  }
-
-  //---------------EVENT-----------//
-
-  //alter to event table
-  await Event.sync({ alter: true });
-  // add to  table
-  //npm start -- --add --eventname "Weddings"
-
-  if (argv.add) {
-    await add(argv);
-  }
-  //   //list all rows in table as object
-  else if (argv.list) {
-    await listevent(argv);
-  }
-  //delete
-  else if (argv.del) {
-    await del(argv);
-  }
-  //  update
-  else if (argv.update) {
-    await update(argv);
-  }
-
-  //---------------------PRICE-------------
-
-  // alter price table
-  await Price.sync({ alter: true });
-  //   // add to table
-  // npm start -- --add --quantity 1 --price 5
-  if (argv.add) {
-    await add(argv);
-  }
-  //   //list all rows in table as object
-  else if (argv.list) {
-    await list(argv);
-  }
-  //  /delete
-  else if (argv.del) {
-    await del(argv);
-  }
-  //  update
-  else if (argv.update) {
-    await update(argv);
-  }
-
-  //---------------------USER--------------//
-
-  //  alter User table
-  await User.sync({ alter: true });
-  //   add to table
-  if (argv.add) {
-    await add(argv);
-  }
-  //   list all rows in table as object
-  else if (argv.list) {
-    await list(argv);
-  }
-  //  delete
-  else if (argv.del) {
-    await del(argv);
-  }
-  //    update
   else if (argv.update) {
     await update(argv);
   } else if (argv.getuser && argv.username && argv.password) {

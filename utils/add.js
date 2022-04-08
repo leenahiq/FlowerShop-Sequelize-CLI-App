@@ -1,23 +1,25 @@
 const { Sequelize } = require("sequelize");
-
+const bcrypt = require("bcrypt");
+const saltRounds = parseInt(process.env.SALT_Round);
 const Flower = require("../models/flower.js");
 const Event = require("../models/event.js");
-const Price = require("../models/price.js");
+
 const User = require("../models/users.js");
 const add = async (argv) => {
-  if (argv.name && argv.colour && argv.indication) {
+  if (argv.flower) {
     //creating instance
     try {
-      const create = await Flower.create({
+      const flower = await Flower.create({
         name: argv.name,
         colour: argv.colour,
         indication: argv.indication,
+        price: argv.price,
       });
-      console.log(create);
+      console.log(flower);
     } catch (error) {
       console.log(error);
     }
-  } else if (argv.eventname) {
+  } else if (argv.event) {
     try {
       const create = await Event.create({
         eventname: argv.eventname,
@@ -26,17 +28,7 @@ const add = async (argv) => {
     } catch (error) {
       console.log(error);
     }
-  } else if (argv.quantity && argv.price) {
-    try {
-      const create = await Price.create({
-        quantity: argv.quantity,
-        price: argv.price,
-      });
-      console.log(create);
-    } catch (error) {
-      console.log(error);
-    }
-  } else if (argv.register && argv.username && argv.fullname && argv.password) {
+  } else if (argv.user) {
     try {
       const salt = await bcrypt.genSalt(saltRounds);
       const hashedPass = await bcrypt.hash(argv.password, salt);
