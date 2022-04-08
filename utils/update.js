@@ -5,13 +5,15 @@ const Event = require("../models/event.js");
 const Price = require("../models/price.js");
 const User = require("../models/users.js");
 const update = async (argv) => {
-  if (argv.name && argv.colour && argv.indication) {
+  if (argv.newname && argv.newcolour && argv.newindication) {
     //creating instance
 
     const update = await Flower.update(
-      { name: argv.name } && { colour: argv.colour } && {
-          indication: argv.indication,
-        },
+      {
+        name: argv.newname,
+        colour: argv.newcolour,
+        indication: argv.newindication,
+      },
       {
         where: {
           name: argv.name,
@@ -19,19 +21,29 @@ const update = async (argv) => {
       }
     );
     console.log(update);
+
+    // { name: argv.name } || { colour: argv.colour } || {
+    //     indication: argv.indication,
+    //   },
+    // {
+    //   where: {
+    //     name: argv.name,
+    //   },
+    // }
+    //);
   } else if (argv.eventname) {
-    const update = await Event.update(
-      { eventname: argv.eventname },
-      {
-        where: {
-          eventname: argv.eventname,
-        },
-      }
-    );
-    console.log(update);
-  } else if (argv.quantity && argv.price) {
+    const update = await Event.findOne({
+      where: { eventname: argv.eventname },
+    });
+    if (update) {
+      update.eventname = argv.eventname;
+      await update.save();
+    } else {
+      console.log("user not found");
+    }
+  } else if (argv.newquantity && argv.newprice) {
     const update = await Price.update(
-      { [argv.key]: [argv.newvalue] } && { [argv.key]: [argv.newvalue] },
+      { [argv.key]: [argv.newvalue], [argv.key]: [argv.newvalue] },
       {
         where: {
           [argv.key]: [argv.value],

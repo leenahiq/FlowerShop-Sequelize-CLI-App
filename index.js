@@ -34,10 +34,12 @@ const main = async (argv) => {
     await add(argv);
   }
   //   //list all rows in table as object
+  //npm start -- --list --attribute "name" "colour" "indication"
   else if (argv.list) {
     await list(argv);
   }
   //   //delete
+  //npm start -- --delete --name "rose"
   else if (argv.del) {
     await del(argv);
   }
