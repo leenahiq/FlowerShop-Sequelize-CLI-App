@@ -4,6 +4,7 @@ const connection = require("../connection");
 
 const Flower = connection.define(
   "Flower",
+
   {
     name: {
       type: DataTypes.STRING,
@@ -23,7 +24,9 @@ const Flower = connection.define(
       allowNull: false,
     },
   },
-  { indexes: [{ unique: true, fields: ["name"] }] }
+  {
+    indexes: [{ unique: true, fields: ["name"] }],
+  }
 );
 
 module.exports = Flower;

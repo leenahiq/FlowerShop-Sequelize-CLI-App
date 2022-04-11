@@ -32,22 +32,23 @@ const main = async (argv) => {
   await Event.sync({ alter: true });
   await User.sync({ alter: true });
 
-  // npm start -- --add --name "rose" --colour "red" --indication "love"
+  // npm start -- --add --flower --name "rose" --colour "red" --indication "love" --price
   // add to flower table
   if (argv.add) {
     await add(argv);
   }
   //   //list all rows in table as object
-  //npm start -- --list --attribute "name" "colour" "indication"
+  //npm start -- --list --flower
   else if (argv.list) {
     await list(argv);
   }
   //   //delete
-  //npm start -- --delete --name "rose"
+  //npm start -- --delete --flower --name "rose"
   else if (argv.del) {
     await del(argv);
   }
   // update
+  //npm start -- --flower --update --name "defodils" --colour "white" --indication "likeness" --price 10
   else if (argv.update) {
     await update(argv);
   } else if (argv.getuser && argv.username && argv.password) {
